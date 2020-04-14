@@ -10,7 +10,11 @@
   "dependencies": {},
   "devDependencies": {
     "@babel/core": "7.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "license": "MIT"
 }

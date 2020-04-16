@@ -21,7 +21,7 @@ body {
   color: #071723;
 }
 
-.box {
+section {
   background-color: #f2f2f2;
   border-radius: 8px;
   box-shadow: 10px 22px 34px 0 rgba(0, 0, 0, 0.5);
@@ -38,32 +38,27 @@ body {
   margin-bottom: 32px;
 }
 
-.label {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.header {
-  background: url(images/header.png) center right no-repeat;
+header {
+  background: url(../images/header.png) center right no-repeat;
   background-size: cover;
   height: 187px;
   padding: 23px 36px;
   width: 100%;
 }
 
-.header .title {
+header h2 {
   color: #fff;
   font-size: 23px;
   font-weight: 300;
 }
 
-.header .title span {
+header h2 span {
   font-weight: bold;
   font-size: 24px;
   line-height: 1.46;
 }
 
-.form textarea {
+form textarea {
   background: #dde3e9;
   border: 1px solid #2f3676;
   border-radius: 8px;
@@ -75,8 +70,22 @@ body {
   font-size: 14px;
 }
 
-.fieldset {
+fieldset {
   padding: 0 32px;
+}
+
+fieldset legend {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.counter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 0px;
+  width: 35%;
 }
 
 .counter svg {
@@ -91,6 +100,11 @@ body {
   font-weight: bold;
   margin: 0 8px;
   width: 60px;
+}
+
+.counter [role="link"] {
+  display: flex;
+  cursor: pointer;
 }
 
 .footer {

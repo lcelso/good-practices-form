@@ -1,5 +1,94 @@
 @import url("https://rsms.me/inter/inter.css");
 
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
 html {
   font-family: "Inter", sans-serif;
 }
@@ -19,6 +108,11 @@ html {
 body {
   background: rebeccapurple;
   color: #071723;
+}
+
+ol,
+ul {
+  list-style: none;
 }
 
 section {
@@ -131,4 +225,55 @@ fieldset legend {
 .footer button:hover {
   border: 2px solid #2f3676;
   background: #191847;
+}
+
+input[type="checkbox"] {
+  display: none;
+}
+
+[required].valid-error input[type="checkbox"] + label {
+  background: #f59393;
+}
+
+input[type="checkbox"] + label > span {
+  display: flex;
+  font-weight: bold;
+  margin-left: 10px;
+  margin-top: -4px;
+}
+/* f00c */
+
+input[type="checkbox"] + label {
+  background-color: #2f3676;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  padding-left: 24px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  line-height: 32px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-bottom: 6px;
+}
+
+input[type="checkbox"] + label:hover {
+  background-color: #191847;
+}
+
+input[type="checkbox"]:checked + label:before {
+  font-family: "Font Awesome 5 Free";
+  content: "\f00c";
+  display: flex;
+  font-weight: bold;
+  margin-left: -20px;
+  margin-top: -3px;
+  height: 20px;
+  color: #ffffff;
+}
+
+input[type="checkbox"]:checked + label > span {
+  display: flex;
+  font-weight: bold;
+  margin-left: 14px;
 }

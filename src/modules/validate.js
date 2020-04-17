@@ -1,26 +1,68 @@
 export function Validate() {
-  const elments = document.querySelectorAll("[required]");
-  const objValid = [];
-  const objLength = [];
+  const apllyError = (elementErrors) => {
+    const { checkboxs, inputs } = elementErrors;
+    const element = document.querySelectorAll(
+      `[value='${checkboxs[0].value}']`
+    )[0];
 
-  elments.forEach((el) => {
-    console.log(el.querySelectorAll("input"));
-    objValid.push({
-      type: el.type,
-      checked:
-        el.type === "checkbox" || el.type === "radio" ? el.checked : null,
-      value: el.type === "input" || el.type === "select-one" ? el.value : null,
-      selectedIndex: el.type === "select-one" ? el.selectedIndex : null,
+    element.closest("[required]").classList.add("valid-error");
+  };
+
+  const createInvalidObject = (checkboxs, inputs) => {
+    const objInvalid = [];
+
+    objInvalid.push({
+      checkboxs: checkboxs,
+      inputs: inputs,
     });
-  });
 
-  objValid.forEach((obj) => {
-    console.log(obj);
-  });
-  // console.log(objValid.length);
+    return apllyError(objInvalid[0]);
+  };
 
-  objValid.forEach((obj) => {
-    // console.log(obj.checked);
-    // if (obj.type === 'checkbox' && obj.checked)
-  });
+  const elementFilter = (elements) => {
+    const elementsGroup = [];
+
+    elements.forEach((item) => {
+      const { value, checked } = item;
+
+      elementsGroup.push({
+        value,
+        checked,
+      });
+    });
+
+    const elementValid = elementsGroup.filter(
+      (item) => item.checked === true
+    )[0];
+
+    if (elementValid?.checked === true) return null;
+    return elementsGroup;
+  };
+
+  const findAndVerifyElements = (elements) => {
+    const elCheckboxs = [];
+    const elInputs = [];
+
+    elements.forEach((el) => {
+      const { tagName: tag, value, name } = el;
+
+      if (tag === "UL") {
+        elCheckboxs.push(elementFilter(el.querySelectorAll("input")));
+      }
+
+      if (tag === "INPUT" && parseInt(value) === 0) {
+        elInputs.push(name);
+      }
+    });
+
+    return createInvalidObject(elCheckboxs[0], elInputs);
+  };
+
+  const init = () => {
+    const elements = document.querySelectorAll("[required]");
+
+    findAndVerifyElements(elements);
+  };
+
+  init();
 }

@@ -4,6 +4,7 @@
     <title>Teste Frontend VAGAS.com</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="src/styles/styles.css" />
+    <script src="https://kit.fontawesome.com/e89be7f635.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -20,14 +21,31 @@
           <legend>Quais stickers:</legend>
           <ul required>
             <li>
-              <input type="checkbox" id="React" />
-              <label for="React">React</label>
+              <input 
+                type="checkbox" 
+                id="React" 
+                name="react"
+                value="react"
+                 />
+              <label for="React"><span>React</span></label>
             </li>
             <li>
-              <label><input type="checkbox" /> Vue</label>
+              <input 
+                type="checkbox"
+                id="vue"
+                name="vue"
+                value="vue"
+              /> 
+              <label for="vue"><span>Vue</span></label>
             </li>
             <li>
-              <label><input type="checkbox" /> Angular</label>
+              <input 
+                type="checkbox"
+                id="angular"
+                name="angular"
+                value="angular"
+              />
+              <label for="angular"><span>Angular</span></label>
             </li>
           </ul>
         </fieldset>
@@ -47,7 +65,8 @@
               required
               name="counter"
               id="counter"
-              type="text"
+              type="number"
+              value="0"
               placeholder="0"
             />
             <div role="link" id="increment">

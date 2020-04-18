@@ -3,6 +3,7 @@
   <head>
     <title>Teste Frontend VAGAS.com</title>
     <meta charset="UTF-8" />
+    <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
     <link rel="stylesheet" href="src/styles/styles.css" />
     <script src="https://kit.fontawesome.com/e89be7f635.js" crossorigin="anonymous"></script>
   </head>
@@ -19,33 +20,66 @@
         <div class="space"></div>
         <fieldset>
           <legend>Quais stickers:</legend>
-          <ul required>
+          <ul required aria-required="true">          
             <li>
-              <input 
-                type="checkbox" 
-                id="React" 
-                name="react"
+              <input type="hidden" name="checkbox" />              
+              <span 
+                role="checkbox" 
+                aria-checked="false"                 
+                tabindex="0"
+                name="checkbox"
                 value="react"
-                 />
-              <label for="React"><span>React</span></label>
+                aria-labelledby="react"></span> 
+              
+              <label 
+                id="react" 
+                class="checkbox-svg">
+                <svg viewBox="0 0 100 100">
+                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                </svg>
+                <span>React</span>
+              </label>
             </li>
             <li>
-              <input 
-                type="checkbox"
-                id="vue"
-                name="vue"
+              <input type="hidden" name="checkbox" />
+              <span 
+                role="checkbox" 
+                aria-checked="false"
+                tabindex="0" 
+                name="checkbox"
                 value="vue"
-              /> 
-              <label for="vue"><span>Vue</span></label>
+                aria-labelledby="vue"></span> 
+              
+              <label 
+                id="vue"
+                class="checkbox-svg">
+                <svg viewBox="0 0 100 100">
+                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                </svg>
+                <span>Vue</span>
+              </label>
             </li>
             <li>
-              <input 
-                type="checkbox"
-                id="angular"
-                name="angular"
+              <input type="hidden" name="checkbox" />
+              <span 
+                role="checkbox" 
+                aria-checked="false"
+                tabindex="0" 
+                name="checkbox"
                 value="angular"
-              />
-              <label for="angular"><span>Angular</span></label>
+                aria-disabled="true"
+                aria-labelledby="angular"></span> 
+              
+              <label 
+                id="angular"
+                class="checkbox-svg">
+                
+                <svg viewBox="0 0 100 100">
+                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                </svg>
+
+                <span>Angular</span>
+              </label>
             </li>
           </ul>
         </fieldset>
@@ -54,7 +88,7 @@
           <legend>Quantos stickers de cada?</legend>
           <div class="space"></div>
           <div class="counter">
-            <div role="link" id="decrement">
+            <div role="link" tabindex="0" id="decrement">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 0A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667zm28 23.333H9.333v-4.666h23.334v4.666z"
@@ -62,14 +96,17 @@
               </svg>
 						</div>
             <input
+              aria-required="true"
               required
+              tabindex="0" 
+              min="0"
               name="counter"
               id="counter"
               type="number"
               value="0"
               placeholder="0"
             />
-            <div role="link" id="increment">
+            <div role="link" tabindex="0" id="increment">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42zm4.666-23.333h9.334V9.333h4.666v9.334h9.334v4.666h-9.334v9.334h-4.666v-9.334H9.333v-4.666z"
@@ -91,11 +128,12 @@
         </fieldset>
         <div class="space-md"></div>
         <div class="footer">
-          <button>Enviar</button>
+          <button type="submit">Enviar</button>
         </div>
       </form>
     </section>
 
     <script type="module" src="./src/modules/index.js"></script>
+
   </body>
 </html>

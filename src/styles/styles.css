@@ -124,6 +124,10 @@ section {
   width: 550px;
 }
 
+.hide {
+  display: none;
+}
+
 .space {
   margin-bottom: 16px;
 }
@@ -194,6 +198,11 @@ fieldset legend {
   font-weight: bold;
   margin: 0 8px;
   width: 60px;
+  text-align: center;
+}
+
+.counter input.valid-error {
+  background: #f59393;
 }
 
 .counter [role="link"] {
@@ -227,53 +236,123 @@ fieldset legend {
   background: #191847;
 }
 
-input[type="checkbox"] {
-  display: none;
+.error-container {
+  min-height: 100px;
+  background: #dde3e9;
+  padding: 10px;
 }
 
-[required].valid-error input[type="checkbox"] + label {
-  background: #f59393;
+.error-container p {
+  color: #860000;
 }
 
-input[type="checkbox"] + label > span {
-  display: flex;
+.error-container p strong {
+  display: block;
   font-weight: bold;
-  margin-left: 10px;
-  margin-top: -4px;
 }
-/* f00c */
 
-input[type="checkbox"] + label {
+[role="checkbox"] {
+  padding: 5px;
+  border-radius: 5px;
   background-color: #2f3676;
-  display: flex;
   width: 24px;
   height: 24px;
-  padding-left: 24px;
-  background-position: 0 0;
-  background-repeat: no-repeat;
-  line-height: 32px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 6px;
+  display: inline-block;
 }
 
-input[type="checkbox"] + label:hover {
+li:focus {
+  outline: 1px solid green;
+}
+
+li:hover > [role="checkbox"],
+[role="checkbox"]:hover {
   background-color: #191847;
 }
 
-input[type="checkbox"]:checked + label:before {
-  font-family: "Font Awesome 5 Free";
-  content: "\f00c";
-  display: flex;
-  font-weight: bold;
-  margin-left: -20px;
-  margin-top: -3px;
-  height: 20px;
-  color: #ffffff;
+[role="checkbox"]:focus {
+  outline: none;
+  border-radius: 4px;
+  padding: 10px;
 }
 
-input[type="checkbox"]:checked + label > span {
-  display: flex;
-  font-weight: bold;
-  margin-left: 14px;
+textarea:focus,
+[role="link"]:focus,
+button:focus,
+input:focus,
+[role="checkbox"]:focus {
+  outline: dashed 2px #191847;
+  outline-offset: 3px;
+}
+
+[aria-checked="true"]::before {
+  width: 24px;
+  height: 24px;
+}
+
+[aria-checked="false"]::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+}
+
+.checkbox-svg {
+  padding-left: 32px;
+  position: relative;
+  top: -4px;
+  user-select: none;
+}
+
+.valid-error .checkbox-svg {
+  color: #f33232;
+}
+
+.checkbox-svg:before {
+  position: absolute;
+  left: 0;
+  top: -1px;
+  width: 24px;
+  height: 24px;
+  transition: all 0.35s ease-out;
+}
+
+.checkbox-svg svg {
+  width: 15px;
+  height: 15px;
+  margin-left: -55px;
+  margin-top: -5px;
+  margin-right: 6px;
+}
+
+.checkbox-svg .path {
+  stroke-dashoffset: 111.46px;
+  stroke-dasharray: 111.46px;
+  stroke: #3863d9;
+  transition: all 0.35s ease-out;
+}
+
+[aria-checked="true"] + .checkbox-svg .path {
+  stroke: #fff;
+  stroke-dashoffset: 0;
+}
+
+.valid-error li:hover > [role="checkbox"],
+.valid-error [role="checkbox"]:hover,
+.valid-error [role="checkbox"] {
+  background-color: #f59393;
+}
+
+.valid-error [aria-disabled="true"] + label,
+[aria-disabled="true"] + label {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.valid-error li:hover > [aria-disabled="true"],
+.valid-error [aria-disabled="true"],
+[aria-disabled="true"]:focus,
+[aria-disabled="true"],
+li:hover > [aria-disabled="true"] {
+  background: #ccc;
+  cursor: not-allowed;
+  outline: none;
 }

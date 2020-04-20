@@ -1,38 +1,53 @@
+import { fnEvents } from "./binds";
+import { Const } from "./configs";
+
 export function ChangeCheckbox() {
-  const fnEvents = (...events) => {
-    const { 0: araryEvents, 1: element } = events;
+  const { ELEMENT_CHECKBOX, CLASS_VALID_ERROR } = Const();
+  let arrayCheckbox = document.querySelectorAll(ELEMENT_CHECKBOX);
+  let arrayLabel = document.querySelectorAll("label.checkbox-svg");
+  let qtyChecked = 0;
 
-    araryEvents.forEach((event) => {
-      element.forEach((item) => {
-        item.addEventListener(event, () => {
-          const elSpan = item.parentNode.querySelector("[aria-labelledby]");
-          const elDisabled = elSpan.getAttribute("aria-disabled");
-          const iptHidden = elSpan.parentNode.querySelector("input");
+  const verify = (e, item) => {
+    const elSpan = item.parentNode.querySelector("[aria-labelledby]");
+    const elDisabled = elSpan.getAttribute("aria-disabled");
+    const iptHidden = elSpan.parentNode.querySelector("input");
 
-          if (!elDisabled) {
-            switch (elSpan.getAttribute("aria-checked")) {
-              case "true":
-                elSpan.setAttribute("aria-checked", "false");
-                iptHidden.setAttribute("value", "");
-                break;
-              case "false":
-                elSpan.setAttribute("aria-checked", "true");
-                elSpan.closest("[required]").classList.remove("valid-error");
-                iptHidden.setAttribute(
-                  "value",
-                  elSpan.getAttribute("aria-labelledby")
-                );
-                break;
-            }
+    if (!elDisabled) {
+      switch (elSpan.getAttribute("aria-checked")) {
+        case "true":
+          --qtyChecked;
+          elSpan.setAttribute("aria-checked", "false");
+          if (qtyChecked <= 0) {
+            elSpan.closest("[required]").classList.add(CLASS_VALID_ERROR);
           }
-        });
-      });
-    });
+          iptHidden.setAttribute("value", "");
+          break;
+        case "false":
+          ++qtyChecked;
+          elSpan.setAttribute("aria-checked", "true");
+
+          if (qtyChecked >= 1) {
+            elSpan.closest("[required]").classList.remove(CLASS_VALID_ERROR);
+          }
+
+          iptHidden.setAttribute(
+            "value",
+            elSpan.getAttribute("aria-labelledby")
+          );
+          break;
+      }
+    }
   };
 
-  let arrayCheckbox = document.querySelectorAll('span[role="checkbox"]');
-  let arrayLabel = document.querySelectorAll("label.checkbox-svg");
-  let arrayElements = [...arrayCheckbox, ...arrayLabel];
+  const elementClickBindEvents = fnEvents(["click"], verify);
+  const elementKeyBindEvents = fnEvents(["keypress"], verify);
 
-  fnEvents(...[["click", "keypress"], arrayElements]);
+  arrayLabel.forEach((item) => {
+    elementClickBindEvents(item)(item);
+    elementKeyBindEvents(item)(item);
+  });
+
+  arrayCheckbox.forEach((item) => {
+    elementKeyBindEvents(item)(item);
+  });
 }

@@ -15,18 +15,16 @@
           Formulário <span>para compra de</span><span>Pacote de Stickers</span>
         </h2>
       </header>
-      <div class="space"></div>
       <form>
-        <div class="space"></div>
         <fieldset>
-          <legend>Quais stickers:</legend>
-          <ul required aria-required="true">          
+          <legend class="space">Quais stickers:</legend>
+          <ul class="space-md" required aria-required="true">          
             <li>
               <input type="hidden" name="checkbox" />              
               <span 
                 role="checkbox" 
                 aria-checked="false"                 
-                tabindex="0"
+                tabindex="1"
                 name="checkbox"
                 value="react"
                 aria-labelledby="react"></span> 
@@ -45,7 +43,7 @@
               <span 
                 role="checkbox" 
                 aria-checked="false"
-                tabindex="0" 
+                tabindex="2" 
                 name="checkbox"
                 value="vue"
                 aria-labelledby="vue"></span> 
@@ -64,7 +62,7 @@
               <span 
                 role="checkbox" 
                 aria-checked="false"
-                tabindex="0" 
+                tabindex="3" 
                 name="checkbox"
                 value="angular"
                 aria-disabled="true"
@@ -85,10 +83,9 @@
         </fieldset>
         <div class="space-md"></div>
         <fieldset>
-          <legend>Quantos stickers de cada?</legend>
-          <div class="space"></div>
+          <legend class="space">Quantos stickers de cada?</legend>
           <div class="counter">
-            <div role="link" tabindex="0" id="decrement">
+            <div role="link" tabindex="4" id="decrement">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 0A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667zm28 23.333H9.333v-4.666h23.334v4.666z"
@@ -98,7 +95,7 @@
             <input
               aria-required="true"
               required
-              tabindex="0" 
+              tabindex="5" 
               min="0"
               name="counter"
               id="counter"
@@ -106,7 +103,7 @@
               value="0"
               placeholder="0"
             />
-            <div role="link" tabindex="0" id="increment">
+            <div role="link" tabindex="6" id="increment">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42zm4.666-23.333h9.334V9.333h4.666v9.334h9.334v4.666h-9.334v9.334h-4.666v-9.334H9.333v-4.666z"
@@ -117,9 +114,9 @@
         </fieldset>
         <div class="space-md"></div>
         <fieldset>
-          <legend>Observações:</legend>
-          <div class="space"></div>
+          <legend class="space">Observações:</legend>
           <textarea
+            tabindex="7"
             rows="7"
             cols="62"
             name="descricao"

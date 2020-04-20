@@ -1,10 +1,16 @@
-export function Counter(increment, decrement, counter) {
+import { fnEvents } from "./binds";
+
+export function Counter() {
   const store = {
     counter: 0,
   };
 
   const inputCounter = (counter) => {
     counter.value = store.counter;
+
+    if (counter.value === "-1") {
+      counter.value = 0;
+    }
   };
 
   const decrease = (counter) => {
@@ -20,43 +26,41 @@ export function Counter(increment, decrement, counter) {
   const bindEvents = (...value) => {
     const { 0: increment, 1: decrement, 2: elCounter } = value;
 
-    const fnEvents = (events) => {
-      return (element) => {
-        return (type) => {
-          events.forEach((event) => {
-            element.addEventListener(event, (e) => {
-              if (e.keyCode === 40 && e.key === "ArrowDown") {
-                if (elCounter.value <= 1)
-                  elCounter.classList.add("valid-error");
-              }
+    const verify = (e, type) => {
+      if (e.type === "blur") {
+        inputCounter(store);
+      }
 
-              if (e.key === "ArrowUp") {
-                elCounter.classList.remove("valid-error");
-              }
+      if (e.keyCode === 40 && e.key === "ArrowDown") {
+        if (elCounter.value <= 1) {
+          elCounter.classList.add("valid-error");
+        }
+      }
 
-              if (e.type === "click" || e.type === "keypress") {
-                type === "increase" ? increase(elCounter) : decrease(elCounter);
-                inputCounter(elCounter);
-              }
-            });
-          });
-        };
-      };
+      if (e.key === "ArrowUp") {
+        elCounter.classList.remove("valid-error");
+      }
+
+      if (e.type === "click" || e.type === "keypress") {
+        type === "increase" ? increase(elCounter) : decrease(elCounter);
+        inputCounter(elCounter);
+      }
     };
 
-    const buttonBindEvents = fnEvents(["click", "keypress"]);
+    const buttonBindEvents = fnEvents(["click", "keypress"], verify);
     buttonBindEvents(increment)("increase");
     buttonBindEvents(decrement)("decrease");
 
-    const inputBindEvents = fnEvents(["keyup", "keydown"]);
+    const inputBindEvents = fnEvents(["keyup", "keydown", "blur"], verify);
     inputBindEvents(elCounter)("increase");
     inputBindEvents(elCounter)("decrease");
+    inputBindEvents(elCounter)("blur");
   };
 
   const init = () => {
-    const elIncrement = document.getElementById(increment);
-    const elDecrement = document.getElementById(decrement);
-    const elCounter = document.getElementById(counter);
+    const elIncrement = document.getElementById("increment");
+    const elDecrement = document.getElementById("decrement");
+    const elCounter = document.getElementById("counter");
 
     bindEvents(...[elIncrement, elDecrement, elCounter]);
     inputCounter(elCounter);

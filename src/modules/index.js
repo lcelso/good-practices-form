@@ -2,6 +2,6 @@ import { Counter } from "./counter";
 import { Validate } from "./validate";
 import { ChangeCheckbox } from "./checkbox-accessibility";
 
-Counter("increment", "decrement", "counter");
+Counter();
 ChangeCheckbox();
 Validate();

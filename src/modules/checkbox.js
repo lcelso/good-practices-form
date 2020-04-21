@@ -16,7 +16,6 @@ export function ChangeCheckbox() {
         case "true":
           --qtyChecked;
           elSpan.setAttribute("aria-checked", "false");
-          console.log(elSpan)
 
           if (qtyChecked <= 0) {
             elSpan.closest("[required]").classList.add(CLASS_VALID_ERROR);
@@ -26,7 +25,6 @@ export function ChangeCheckbox() {
           ++qtyChecked;
           elSpan.setAttribute("aria-checked", "true");
 
-          console.log(elSpan)
           if (qtyChecked >= 1) {
             elSpan.closest("[required]").classList.remove(CLASS_VALID_ERROR);
           }          

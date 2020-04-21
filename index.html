@@ -6,127 +6,133 @@
     <meta content="text/html; charset=UTF-8; X-Content-Type-Options=nosniff" http-equiv="Content-Type" />
     <link rel="stylesheet" href="src/styles/styles.css" />
     <script src="https://kit.fontawesome.com/e89be7f635.js" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
 
   <body>
     <section>
-      <header>
-        <h2>
-          Formulário <span>para compra de</span><span>Pacote de Stickers</span>
+      <header>                
+        <h2 aria-label="Formulário para compra de Pacote de Stickers.">
+          Formulário <span aria-hidden="true">para compra de</span><span aria-hidden="true">Pacote de Stickers</span>
         </h2>
       </header>
+      
       <form>
         <fieldset>
-          <legend class="space">Quais stickers:</legend>
-          <ul class="space-md" required aria-required="true">          
-            <li>
-              <input type="hidden" name="checkbox" />              
+          <legend id="group-checkbox">Quais <span lang="en-US">stickers:</span></legend>
+          <ul
+            class="list-group-checkbox"
+            role="group" 
+            aria-labelledby="group-checkbox" 
+            class="space-md" 
+            required 
+            aria-required="true">          
+            <li>              
               <span 
-                role="checkbox" 
-                aria-checked="false"                 
-                tabindex="1"
+                role="checkbox"
+                tabindex="0"
+                aria-checked="false"
                 name="checkbox"
                 value="react"
-                aria-labelledby="react"></span> 
-              
-              <label 
-                id="react" 
-                class="checkbox-svg">
-                <svg viewBox="0 0 100 100">
-                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
-                </svg>
-                <span>React</span>
-              </label>
+                aria-labelledby="react">
+
+                <i class="box">
+                  <svg viewBox="0 0 100 100">
+                    <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                  </svg>
+                </i>
+
+                <span class="text">React</span>
+
+              </span> 
             </li>
             <li>
-              <input type="hidden" name="checkbox" />
               <span 
                 role="checkbox" 
+                tabindex="0"
                 aria-checked="false"
-                tabindex="2" 
                 name="checkbox"
                 value="vue"
-                aria-labelledby="vue"></span> 
-              
-              <label 
-                id="vue"
-                class="checkbox-svg">
-                <svg viewBox="0 0 100 100">
-                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
-                </svg>
-                <span>Vue</span>
-              </label>
+                aria-labelledby="vue">
+                <i class="box">
+                  <svg viewBox="0 0 100 100">
+                    <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                  </svg>
+                </i>
+
+                <span class="text">Vue</span>
+              </span> 
             </li>
             <li>
-              <input type="hidden" name="checkbox" />
               <span 
                 role="checkbox" 
+                tabindex="0"
                 aria-checked="false"
-                tabindex="3" 
                 name="checkbox"
-                value="angular"
-                aria-disabled="true"
-                aria-labelledby="angular"></span> 
-              
-              <label 
-                id="angular"
-                class="checkbox-svg">
-                
-                <svg viewBox="0 0 100 100">
-                  <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
-                </svg>
+                value="angular"                  
+                aria-labelledby="angular">
+                <i class="box">
+                  <svg viewBox="0 0 100 100">
+                    <path class="path" fill="none" stroke="#000" stroke-width="13" d="M12.1 52.1l24.4 24.4 53-53"/>
+                  </svg>
+                </i>
 
-                <span>Angular</span>
-              </label>
+                <span class="text">Angular</span>
+              </span> 
             </li>
           </ul>
         </fieldset>
-        <div class="space-md"></div>
+        
         <fieldset>
-          <legend class="space">Quantos stickers de cada?</legend>
-          <div class="counter">
-            <div role="link" tabindex="4" id="decrement">
+          <legend id="group-couter">Quantos stickers de cada?</legend>
+          <div 
+            role="group"           
+            aria-labelledby="group-couter"
+            class="counter">
+            <button tabindex="0" aria-label="diminuir a quantidade de stickers" id="decrement">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 0A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667zm28 23.333H9.333v-4.666h23.334v4.666z"
                 />
               </svg>
-						</div>
+            </button>              
+	
             <input
               aria-required="true"
               required
-              tabindex="5" 
-              min="0"
+              tabindex="0" 
+              min="0" 
               name="counter"
               id="counter"
               type="number"
               value="0"
               placeholder="0"
-            />
-            <div role="link" tabindex="6" id="increment">
+            />            
+            <button tabindex="0" aria-label="aumentar a quantidade de stickers" id="increment">
               <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42">
                 <path
                   d="M4.667 42h32.666A4.668 4.668 0 0 0 42 37.333V4.667A4.668 4.668 0 0 0 37.333 0H4.667A4.668 4.668 0 0 0 0 4.667v32.666A4.668 4.668 0 0 0 4.667 42zm4.666-23.333h9.334V9.333h4.666v9.334h9.334v4.666h-9.334v9.334h-4.666v-9.334H9.333v-4.666z"
                 />
               </svg>
-            </a>
+            </button>
           </div>
         </fieldset>
-        <div class="space-md"></div>
+        
         <fieldset>
-          <legend class="space">Observações:</legend>
-          <textarea
-            tabindex="7"
+          <legend id="group-textarea">Observações:</legend>
+          <textarea            
+            aria-labelledby="group-textarea"
+            tabindex="0" 
             rows="7"
             cols="62"
             name="descricao"
             placeholder="Alguma dúvida? Recado?"
           ></textarea>
-        </fieldset>
-        <div class="space-md"></div>
-        <div class="footer">
+        </fieldset>   
+
+        <footer>
           <button type="submit">Enviar</button>
-        </div>
+        </footer>
       </form>
     </section>
 

@@ -124,14 +124,20 @@ section {
   width: 550px;
 }
 
+label {
+  cursor: pointer;
+}
+
 .hide {
   display: none;
 }
 
+legend,
 .space {
   margin-bottom: 16px;
 }
 
+fieldset,
 .space-md {
   margin-bottom: 32px;
 }
@@ -157,7 +163,22 @@ header h2 span {
   display: block;
 }
 
-form textarea {
+form fieldset {
+  padding: 0 32px;
+}
+
+form fieldset legend {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+form fieldset textarea:focus {
+  background: #9fb6ce;
+  color: #2f3676;
+  font-weight: bold;
+}
+
+form fieldset textarea {
   background: #dde3e9;
   border: 1px solid #2f3676;
   border-radius: 8px;
@@ -169,16 +190,7 @@ form textarea {
   font-size: 14px;
 }
 
-fieldset {
-  padding: 0 32px;
-}
-
-fieldset legend {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.counter {
+form fieldset .counter {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: 1fr;
@@ -187,11 +199,11 @@ fieldset legend {
   width: 35%;
 }
 
-.counter svg {
+form fieldset .counter svg {
   fill: #2f3676;
 }
 
-.counter input {
+form fieldset .counter input {
   background: #dde3e9;
   border: 1px solid #2f3676;
   border-radius: 7px;
@@ -202,23 +214,92 @@ fieldset legend {
   text-align: center;
 }
 
-.counter input.valid-error {
+form fieldset .counter input.valid-error {
   background: #f59393;
 }
 
-.counter [role="link"] {
+form fieldset .counter button,
+form fieldset .counter [role="link"] {
   display: flex;
+  cursor: pointer;
+  border: none;
+  height: 42px;
+  width: 42px;
+}
+
+form fieldset [role="checkbox"] {
+  width: 100%;
+  display: inline-block;
+  position: relative;
   cursor: pointer;
 }
 
-.footer {
+form fieldset [role="checkbox"]:focus {
+  padding: 8px;
+  outline: dashed 1px #2f3676;
+}
+
+form fieldset [aria-disabled="true"]:focus {
+  outline: none;
+  padding: 0;
+}
+
+form fieldset [role="checkbox"]:before {
+  position: absolute;
+  transition: all 0.35s ease-out;
+}
+
+form fieldset [aria-checked="true"]::before {
+  width: 24px;
+  height: 24px;
+}
+
+form fieldset [aria-checked="false"]::before {
+  content: "";
+  width: 24px;
+  height: 24px;
+}
+
+form fieldset [role="checkbox"] > .text {
+  padding-top: 3px;
+}
+
+form fieldset [role="checkbox"] .box {
+  border-radius: 5px;
+  background-color: #2f3676;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px 0 0;
+  padding: 4px;
+  display: inline-block;
+}
+
+form fieldset [role="checkbox"] > .box svg {
+  width: 15px;
+  height: 15px;    
+  display: inline-block;
+}
+
+form fieldset [role="checkbox"] > .box svg .path {
+  stroke-dashoffset: 111.46px;
+  stroke-dasharray: 111.46px;
+  stroke: #3863d9;
+  transition: all 0.35s ease-out;
+}
+
+form fieldset [aria-checked="true"] > .box svg .path {
+  stroke: #fff;
+  stroke-dashoffset: 0;
+}
+
+footer {
   padding: 32px;
   background: #dde3e9;
   display: flex;
   justify-content: flex-end;
 }
 
-.footer button {
+footer button {
   appearance: none;
   background: #2f3676;
   border: 2px solid #2f3676;
@@ -232,8 +313,8 @@ fieldset legend {
   cursor: pointer;
 }
 
-.footer button:focus,
-.footer button:hover {
+footer button:focus,
+footer button:hover {
   border: 2px solid #2f3676;
   background: #191847;
 }
@@ -257,108 +338,32 @@ fieldset legend {
   color: #00c57c;
 }
 
-[role="checkbox"] {
-  padding: 5px;
-  border-radius: 5px;
-  background-color: #2f3676;
-  width: 24px;
-  height: 24px;
-  display: inline-block;
+.list-group-checkbox li {
+  margin-bottom: 10px;
 }
 
-li:focus {
-  outline: 1px solid green;
-}
-
-li:hover > [role="checkbox"],
-[role="checkbox"]:hover {
-  background-color: #191847;
-}
-
-[role="checkbox"]:focus {
-  outline: none;
-  border-radius: 4px;
-  padding: 10px;
-}
-
-textarea:focus,
-[role="link"]:focus,
-button:focus,
-input:focus,
-[role="checkbox"]:focus {
-  outline: dashed 2px #191847;
-  outline-offset: 3px;
-}
-
-[aria-checked="true"]::before {
-  width: 24px;
-  height: 24px;
-}
-
-[aria-checked="false"]::before {
-  content: "";
-  width: 24px;
-  height: 24px;
-}
-
-.checkbox-svg {
-  padding-left: 32px;
-  position: relative;
-  top: -4px;
-  user-select: none;
-}
-
-.valid-error .checkbox-svg {
+.valid-error .text {
   color: #f33232;
 }
 
-.checkbox-svg:before {
-  position: absolute;
-  left: 0;
-  top: -1px;
-  width: 24px;
-  height: 24px;
-  transition: all 0.35s ease-out;
-}
-
-.checkbox-svg svg {
-  width: 15px;
-  height: 15px;
-  margin-left: -55px;
-  margin-top: -5px;
-  margin-right: 6px;
-}
-
-.checkbox-svg .path {
-  stroke-dashoffset: 111.46px;
-  stroke-dasharray: 111.46px;
-  stroke: #3863d9;
-  transition: all 0.35s ease-out;
-}
-
-[aria-checked="true"] + .checkbox-svg .path {
-  stroke: #fff;
-  stroke-dashoffset: 0;
-}
-
-.valid-error li:hover > [role="checkbox"],
-.valid-error [role="checkbox"]:hover,
-.valid-error [role="checkbox"] {
+.valid-error [role="checkbox"] .box {
   background-color: #f59393;
 }
 
-.valid-error [aria-disabled="true"] + label,
-[aria-disabled="true"] + label {
+.valid-error [aria-disabled="true"] > .text,
+[aria-disabled="true"] > .text {
   color: #ccc;
   cursor: not-allowed;
 }
 
-.valid-error li:hover > [aria-disabled="true"],
-.valid-error [aria-disabled="true"],
-[aria-disabled="true"]:focus,
-[aria-disabled="true"],
-li:hover > [aria-disabled="true"] {
+form fieldset [aria-disabled="true"] > .box {
   background: #ccc;
   cursor: not-allowed;
   outline: none;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }

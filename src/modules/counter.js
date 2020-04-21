@@ -24,13 +24,11 @@ export function Counter() {
   };
 
   const bindEvents = (...value) => {
+    
     const { 0: increment, 1: decrement, 2: elCounter } = value;
 
     const verify = (e, type) => {
-      if (e.type === "blur") {
-        inputCounter(store);
-      }
-
+      if (e.type === "blur") inputCounter(store);
       if (e.keyCode === 40 && e.key === "ArrowDown") {
         if (elCounter.value <= 1) {
           elCounter.classList.add("valid-error");
@@ -41,13 +39,14 @@ export function Counter() {
         elCounter.classList.remove("valid-error");
       }
 
-      if (e.type === "click" || e.type === "keypress") {
+      if (e.type === "click") {
+        e.preventDefault();
         type === "increase" ? increase(elCounter) : decrease(elCounter);
         inputCounter(elCounter);
       }
     };
 
-    const buttonBindEvents = fnEvents(["click", "keypress"], verify);
+    const buttonBindEvents = fnEvents(["click"], verify);
     buttonBindEvents(increment)("increase");
     buttonBindEvents(decrement)("decrease");
 

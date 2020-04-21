@@ -9,31 +9,27 @@ export function ChangeCheckbox() {
 
   const verify = (e, item) => {
     const elSpan = item.parentNode.querySelector("[aria-labelledby]");
-    const elDisabled = elSpan.getAttribute("aria-disabled");
-    const iptHidden = elSpan.parentNode.querySelector("input");
+    const elDisabled = elSpan.getAttribute("aria-disabled");    
 
     if (!elDisabled) {
       switch (elSpan.getAttribute("aria-checked")) {
         case "true":
           --qtyChecked;
           elSpan.setAttribute("aria-checked", "false");
+          console.log(elSpan)
+
           if (qtyChecked <= 0) {
             elSpan.closest("[required]").classList.add(CLASS_VALID_ERROR);
-          }
-          iptHidden.setAttribute("value", "");
+          }          
           break;
         case "false":
           ++qtyChecked;
           elSpan.setAttribute("aria-checked", "true");
 
+          console.log(elSpan)
           if (qtyChecked >= 1) {
             elSpan.closest("[required]").classList.remove(CLASS_VALID_ERROR);
-          }
-
-          iptHidden.setAttribute(
-            "value",
-            elSpan.getAttribute("aria-labelledby")
-          );
+          }          
           break;
       }
     }
@@ -42,12 +38,8 @@ export function ChangeCheckbox() {
   const elementClickBindEvents = fnEvents(["click"], verify);
   const elementKeyBindEvents = fnEvents(["keypress"], verify);
 
-  arrayLabel.forEach((item) => {
-    elementClickBindEvents(item)(item);
-    elementKeyBindEvents(item)(item);
-  });
-
   arrayCheckbox.forEach((item) => {
+    elementClickBindEvents(item)(item);
     elementKeyBindEvents(item)(item);
   });
 }

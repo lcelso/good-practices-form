@@ -1,0 +1,282 @@
+@import './reset.scss';
+@import './colors.scss';
+
+section {
+  background-color: $color-gray;
+  border-radius: 8px;
+  box-shadow: 10px 22px 34px 0 rgba(0, 0, 0, 0.5);
+  margin: 20px auto;
+  overflow: hidden;
+  width: 550px;
+}
+
+.hide {
+  display: none;
+}
+
+legend,
+.space {
+  margin-bottom: 16px;
+}
+
+fieldset,
+.space-md {
+  margin-bottom: 32px;
+}
+
+.focus {  
+  outline: dashed 1px $color-blue-medium;
+}
+
+header {
+  background: url(../images/header.png) center right no-repeat;
+  background-size: cover;
+  height: 187px;
+  padding: 23px 36px;
+  width: 100%;
+
+  h2 {
+    color: $color-white;
+    font-size: 23px;
+    font-weight: 300;
+
+    span {
+      font-weight: bold;
+      font-size: 24px;
+      line-height: 1.46;
+      display: block;
+    }
+  }
+}
+
+form {
+  fieldset {
+    padding: 0 32px;
+
+    legend {
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    textarea {
+      background: $color-blue-light;
+      border: 1px solid $color-blue-medium;
+      color: $color-blue-dark;
+
+      width: 100%;
+      border-radius: 8px;
+      height: 140px;
+      padding: 16px;
+      font-size: 14px;
+      resize: none;      
+
+      &:focus {
+        background: #9fb6ce;
+        color: $color-blue-medium;
+        font-weight: bold;
+        @extend .focus;
+      }
+    }
+
+    .counter {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: 1fr;
+      grid-column-gap: 10px;
+      grid-row-gap: 0px;
+      width: 35%;
+
+      svg {
+        fill: $color-blue-medium;
+      }
+
+      input {
+        background: $color-blue-light;
+        border: 1px solid $color-blue-medium;
+        border-radius: 7px;
+        font-size: 20px;
+        font-weight: bold;
+        margin: 0 8px;
+        width: 60px;
+        text-align: center;
+      }
+
+      input.valid-error {
+        background: $error-background;
+      }
+
+      button {
+        display: flex;
+        cursor: pointer;
+        border: none;
+        height: 42px;
+        width: 42px;        
+      }      
+    }
+
+    .list-group-checkbox { 
+      li {
+        margin-bottom: 10px;
+      }
+    }    
+
+    [role="checkbox"] {
+      width: 100%;
+      display: inline-block;
+      position: relative;
+      cursor: pointer;
+
+      &:hover,
+      &:focus {
+        padding: 8px;
+        @extend .focus;
+      }
+
+      &::before {
+        position: absolute;
+        transition: all 0.35s ease-out;
+      }
+
+      .text {
+        padding-top: 3px;
+      }
+
+      .box {
+        border-radius: 5px;
+        background-color: $color-blue-medium;
+        width: 24px;
+        height: 24px;
+        margin: 0 10px 0 0;
+        padding: 4px;
+        display: inline-block;
+
+        > svg {
+          width: 15px;
+          height: 15px;    
+          display: inline-block;
+
+          path {
+            stroke-dashoffset: 111.46px;
+            stroke-dasharray: 111.46px;
+            stroke: #3863d9;
+            transition: all 0.35s ease-out;            
+          }
+        }
+      }
+
+    }
+
+    [aria-disabled="true"] {        
+      &:focus {
+        outline: none;
+        padding: 0;
+      }
+    
+      .text {
+        color: $disabled;
+        cursor: not-allowed;
+      }
+    
+      .box {
+        background-color: $disabled;
+      }
+    }
+
+    [aria-checked="true"] {
+      &::before {
+        width: 24px;
+        height: 24px;
+      }
+
+      .box svg .path {
+        stroke: $color-white;
+        stroke-dashoffset: 0;
+      }
+    }
+
+    [aria-checked="false"] {
+      &::before {
+        content: "";
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    button {
+      &:hover,
+      &:focus, {
+        @extend .focus;
+      }
+    }
+
+  }
+}
+
+footer {
+  padding: 32px;
+  background: $color-blue-light;
+  display: flex;
+  justify-content: flex-end;
+
+  button {
+    appearance: none;
+    background: $color-blue-medium;
+    border: 2px solid $color-blue-medium;
+    border-radius: 8px;
+    color: $color-white;
+    padding: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 8px 32px;
+    cursor: pointer;
+    
+    &:hover,
+    &:focus {
+      @extend .focus;
+    }
+
+  }
+
+  .container-message {
+    min-height: 100px;
+    background: $color-blue-light;
+    padding: 10px;
+  
+    .error {
+      color: #860000;
+  
+      strong {
+        display: block;
+        font-weight: bold;
+      }
+    }
+  
+    .success {
+      color: #00c57c;
+    }
+  }
+}
+
+.valid-error  {
+  .text {
+    color: $error-color;
+  }
+
+  [role=checkbox] {
+    .box {
+      background-color: $error-background;
+    }
+  }
+
+  [aria-disabled="true"] {
+    .text {
+      color: $disabled;
+      cursor: not-allowed;
+    }
+
+    .box {
+      background-color: $disabled;
+    }
+  }
+}

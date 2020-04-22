@@ -1,11 +1,12 @@
 @import './reset.scss';
 @import './colors.scss';
+@import './mixins.scss';
 
 section {
-  background-image: url(../images/header.png);
+  background-image: url("https://raw.githubusercontent.com/lcelso/good-practices-form/master/src/images/header.png");
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 0 -70px;
+  background-position: top center;
 
   background-color: $color-gray;
   border-radius: 20px;
@@ -19,14 +20,26 @@ section {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   grid-row-gap: 0px;
-  width: 60%;
-
-  @media only screen 
-  and (min-device-width : 375px) 
-  and (max-device-width : 812px) {
-    width: 90%;
-    background-position: top center;
-  }  
+  width: 550px;
+  max-width: 550px;
+  
+  @include for-devices-375-812 {
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 auto;
+    background-position: 0 -4px;
+    min-height: 100vh;
+  } 
+  
+  @include for-devices-360-640 {    
+    width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    margin: 0 auto;
+    background-position: 0 -4px;
+    min-height: 100vh;
+  } 
 }
 
 .hide {
@@ -44,7 +57,8 @@ fieldset,
 }
 
 .focus {  
-  outline: dashed 1px $color-blue-medium;
+  outline: 0;
+  box-shadow: -1px 0px 25px 12px rgba(0,0,0,0.25);
 }
 
 header {  
@@ -64,6 +78,32 @@ header {
       display: block;
     }
   }
+   
+  @include for-devices-375-812 {
+    height: 140px;
+    padding: 13px 36px;
+
+    h2 {
+      font-size: 16px;
+
+      span {
+        font-size: 18px;
+      }
+    }
+  } 
+
+  @include for-devices-360-640 {    
+    height: 140px;
+    padding: 13px 36px;
+
+    h2 {
+      font-size: 16px;
+
+      span {
+        font-size: 18px;
+      }
+    }
+  } 
 }
 
 form {
@@ -85,10 +125,10 @@ form {
       height: 140px;
       padding: 16px;
       font-size: 14px;
-      resize: none;      
+      resize: none;
 
       &:focus {
-        background: #9fb6ce;
+        background: $color-input-focus;
         color: $color-blue-medium;
         font-weight: bold;
         @extend .focus;
@@ -101,11 +141,11 @@ form {
       grid-template-rows: 1fr;
       grid-column-gap: 10px;
       grid-row-gap: 0px;
-      width: 37%;
+      width: 25%;
 
-      svg {
-        fill: $color-blue-medium;
-      }
+      @include for-desktop-bigger-then-1280 {
+        width: 19%;
+      }      
 
       input {
         background: $color-blue-light;
@@ -116,10 +156,18 @@ form {
         margin: 0 8px;
         width: 60px;
         text-align: center;
+
+        &:focus {
+          background: $color-input-focus;
+          color: $color-blue-medium;
+          font-weight: bold;
+          @extend .focus;
+        }
       }
 
       input.valid-error {
         background: $error-background;
+        border: 1px solid $error-color
       }
 
       button {
@@ -127,7 +175,21 @@ form {
         cursor: pointer;
         border: none;
         height: 42px;
-        width: 42px;        
+        width: 42px;
+
+        svg {
+          fill: $color-blue-medium;
+        }
+        
+        &:disabled {
+          svg {
+            fill: $disabled;
+            border: $disabled-medium;
+            border-color: $disabled-medium;
+            cursor: not-allowed;
+            outline: none;
+          }
+        }
       }      
     }
 
@@ -137,15 +199,23 @@ form {
       }
     }    
 
-    [role="checkbox"] {
-      width: 100%;
+    [role="checkbox"] {      
       display: inline-block;
       position: relative;
       cursor: pointer;
+      padding-right: 10px;
+
+      @include for-devices-375-812 {
+        width: 100%;
+      } 
+      
+      @include for-devices-360-640 {    
+        width: 100%;
+      } 
 
       &:hover,
       &:focus {
-        padding: 8px;
+        outline: none;
         @extend .focus;
       }
 
@@ -220,7 +290,12 @@ form {
     }
 
     button {
-      &:hover,
+      &:hover {
+        svg {
+          fill: $color-hover;
+        }
+      }
+
       &:focus {
         @extend .focus;
       }
@@ -239,6 +314,16 @@ footer {
   justify-content: flex-start;
   align-content: flex-end;
   align-items: flex-end;
+
+  @include for-devices-375-812 {
+    padding: 32px 12px;
+    flex-wrap: wrap;
+  } 
+  
+  @include for-devices-360-640 {
+    padding: 32px 12px;
+    flex-wrap: wrap;
+  }
 
   &:nth-child(1) {
     order: 0;
@@ -275,8 +360,8 @@ footer {
 
     &:disabled {
       background: $disabled;
-      border: $disabled-medium;
-      border-color: $disabled-medium;
+      color: $disabled-medium;
+      border: 1px solid $disabled-medium;
       cursor: not-allowed;
       outline: none;
     }
@@ -286,13 +371,36 @@ footer {
   .container-message {
     min-height: 100px;
     padding: 10px;
-    order: 2;
-    flex: 0 1 auto;
-    align-self: flex-end;
+    margin-right: 60px;
+    width: 100%;
 
-    
+    @include for-devices-375-812 {
+      margin-top: 15px;
+      margin-right: 0;
+    } 
+
+    @include for-devices-360-640 {
+      margin-top: 15px;
+      margin-right: 0;
+    }
+
+    .list-errors {
+      li {
+        margin-bottom: 10px;
+
+        strong {
+          font-weight: bold;
+          color: $error-color-medium;
+        }
+      }
+    }
+
     .error {
-      color: #860000;
+      color: $error-color-medium;
+      margin-bottom: 15px;
+      font-size: 16px;
+      text-transform: uppercase;
+      font-weight: bold;
   
       strong {
         display: block;
@@ -301,7 +409,7 @@ footer {
     }
   
     .success {
-      color: #00c57c;
+      color: $success-color;
     }
   }
 }
@@ -325,6 +433,40 @@ footer {
 
     .box {
       background-color: $disabled;
+    }
+  }
+}
+
+.overlay {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%;
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.7);
+}
+
+.modal {
+  padding: 20px;
+  width: 50%;
+  background: $color-white;
+  position: fixed;
+  z-index: 2;
+  top: 20%; 
+  left: calc(75% / 3);
+  height: 420px;
+  text-align: center;
+
+  p {
+    margin-top: 50px;
+    text-transform: uppercase;
+    font-size: 20px;
+
+    a {
+      color: $error-color
     }
   }
 }

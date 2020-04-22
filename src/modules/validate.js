@@ -14,11 +14,16 @@ const {
 
   MSG_INIT,
   MSG_SUCCESS,
+  ERROR_MSG_LIST,
+  ERROR_MSG_COUNTER,
 } = Const();
 
 const checkboxs = document.querySelectorAll(ELEMENT_CHECKBOX);
 const elInputCounter = document.querySelectorAll('[id="counter"]')[0];
 const elFooter = document.getElementsByTagName("footer")[0];
+const containerError = document.getElementsByClassName(
+  CLASS_CONTAINER_MESSAGE
+);
 
 const createElement = (container, nameClass) => {
   return (paragraph) => {
@@ -43,70 +48,61 @@ const createElement = (container, nameClass) => {
   };
 };
 
-const applyingErrorClass = (elements) => {
-  elements.forEach((item) => {
-    item.classList.add("valid-error");
-  });
-};
-
 const updateListError = (errorsElements) => {
+  if (!errorsElements) return
   const listErrors = document.getElementsByClassName(CLASS_LIST_ERROR)[0];
-  let textElement = "";
+  let textElement = "";  
 
   errorsElements.forEach((element) => {
     const { type, text } = element;
 
     if (type === LIST) {
-      textElement += `<li>É necessario escolher ao menos um item do campo: \n
-        <strong> ${text.replace(":", "")}<strong><li>`;
+      textElement += `<li>${ERROR_MSG_LIST}: \n
+        <strong> ${text.replace(":", "")}</strong><li>`;
     }
 
     if (type === INPUT) {
-      textElement += `<li>O <strong> ${text.replace(
-        ":",
-        ""
-      )}<strong> tem quer ser maior que 0.<li>`;
+      textElement += `<li>${ERROR_MSG_COUNTER}: <strong> ${text.replace(":", "")}
+      </strong><li>`;
     }
   });
 
   listErrors.innerHTML = textElement;
 };
 
-const applyingTextError = (element, errorsElements) => {
-  const isContainer = document.getElementsByClassName(
-    CLASS_CONTAINER_MESSAGE
-  )[0];
-
-  if (!isContainer) {
-    const containerErrorElement = createElement(
-      "div",
-      CLASS_CONTAINER_MESSAGE
-    )("p")(MSG_INIT);
-    element.appendChild(containerErrorElement);
-  }
-  updateListError(errorsElements);
-};
-
 const createObjectError = (elements) => {  
-  const obj = [];
+  const objElements = [];
   
   elements.forEach((item) => {
-    obj.push({
+    objElements.push({
       type: item.tagName,
       element: item,
       text: item.closest("fieldset").querySelector("legend").innerHTML,
     });
   });
 
-  return obj;
+  return objElements;
 };
 
-const apllyError = (elementErrors) => {
-  const containerError = document.getElementsByClassName(
-    CLASS_CONTAINER_MESSAGE
-  );
-  const { checkboxs, inputs } = elementErrors;
+const applyingTextError = (element, errorsElements) => {
+  if (!containerError[0]) {
+    const containerErrorElement = createElement(
+      "div",
+      CLASS_CONTAINER_MESSAGE
+    )("p")(MSG_INIT);
+    element.appendChild(containerErrorElement);
+  }
 
+  updateListError(errorsElements);
+};
+
+const applyingErrorClass = (elements) => {
+  elements.forEach((item) => {
+    item.classList.add("valid-error");
+  });
+};
+
+const apllyError = ({ checkboxs, inputs }) => {
   let elements = [];
 
   if (checkboxs) {
@@ -161,9 +157,9 @@ const createInvalidElementsObject = (checkboxs, inputs) => {
 };
 
 const setSuccess = () => {
-  const button = elFooter.querySelector("button");
+  const elButtonSubmit = elFooter.querySelector("button");
 
-  button.setAttribute("disabled","")
+  elButtonSubmit.setAttribute("disabled","")
   const containerErrorElement = createElement(
     "div",
     CLASS_CONTAINER_MESSAGE
@@ -194,7 +190,7 @@ const sendFormaData = () => {
   data.push({
     checkboxs: checkboxData,
     counter: elInputCounter.value,
-    textarea: elFooter.value,
+    textarea: document.querySelector('textarea').value,
   });
 
   setSuccess();
@@ -202,26 +198,25 @@ const sendFormaData = () => {
   console.table(data[0]);
 };
 
-const findAndVerifyElements = (...value) => {
-  const { 0: elements, 1: type } = value;
-    const elCheckboxs = [];
-    const elInputs = [];
+const findAndVerifyElements = (...{ 0: elements, 1: type }) => {
+  const elCheckboxs = [];
+  const elInputs = [];
 
-    elements.forEach((el) => {
-      const { tagName: tag, value } = el;
+  elements.forEach((el) => {
+    const { tagName: tag, value } = el;
 
-      if (tag === LIST) {
-        elCheckboxs.push(elementFilter(el.querySelectorAll(ELEMENT_CHECKBOX)));
-      }
+    if (tag === LIST) {
+      elCheckboxs.push(elementFilter(el.querySelectorAll(ELEMENT_CHECKBOX)));
+    }
 
-      if (tag === INPUT && parseInt(value) === 0) {
-        elInputs.push(el);
-      }
-    });
+    if (tag === INPUT && parseInt(value) === 0) {
+      elInputs.push(el);
+    }
+  });
 
-    return elCheckboxs[0] === null && elInputs.length === 0 && type === "submit"
-      ? sendFormaData()
-      : createInvalidElementsObject(elCheckboxs[0], elInputs);
+  return elCheckboxs[0] === null && elInputs.length === 0 && type === "submit"
+    ? sendFormaData()
+    : createInvalidElementsObject(elCheckboxs[0], elInputs);
 }
 
 const verify = (e, type) => {
@@ -234,12 +229,8 @@ const verify = (e, type) => {
 const ValidateForm = () => {
   const buttonSumit = document.querySelector('[type="submit"]');
 
-  const inputBindEvents = fnAddEventListener(["click"], verify);
-  inputBindEvents(buttonSumit)("submit");
-
-  checkboxs.forEach((checkbox) => {
-    checkboxBindEvents(checkbox)("checkbox");
-  });
+  const buttonBindEvents = fnAddEventListener(["click"], verify);
+  buttonBindEvents(buttonSumit)("submit");
 };
 
 module.exports = {

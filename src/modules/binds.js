@@ -1,9 +1,9 @@
-export const fnAddEventListener = (events, fn) => {
+export const fnAddEventListener = (events, callback) => {
   return (element) => {
     return (type) => {
       events.forEach((event) => {
         element.addEventListener(event, (e) => {
-          return fn(e, type);
+          return callback(e, type);
         });
       });
     };
@@ -23,4 +23,12 @@ export const toogleClass = (element, className) => {
 
 export const toogleAtribute = (element, attr, boolean) => {
   element.setAttribute(attr, boolean);
+}
+
+export const removeAttribute = (element, attr) => {
+  element.removeAttribute(attr);
+}
+
+export const removeClass = (element, className) => {
+  element.classList.remove(className);
 }

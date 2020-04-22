@@ -13,5 +13,7 @@ export function Const() {
 
     MSG_INIT: "Favor preencher os dados",
     MSG_SUCCESS: "Formulário enviado com sucesso!",
+    ERROR_MSG_LIST: "É necessario escolher ao menos um item do campo",
+    ERROR_MSG_COUNTER: "É necessario que o valor seja maior que 0 no campo",
   };
 }

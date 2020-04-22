@@ -7,7 +7,17 @@ section {
   box-shadow: 10px 22px 34px 0 rgba(0, 0, 0, 0.5);
   margin: 20px auto;
   overflow: hidden;
-  width: 550px;
+
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-row-gap: 0px;
+  width: 60%;
+
+  @media only screen 
+  and (min-device-width : 375px) 
+  and (max-device-width : 812px) {
+    width: 90%;
+  }  
 }
 
 .hide {
@@ -29,9 +39,9 @@ fieldset,
 }
 
 header {
-  background: url(../images/header.png) center right no-repeat;
+  background-image: url(../images/header.png);
   background-size: cover;
-  height: 187px;
+  height: 200px;
   padding: 23px 36px;
   width: 100%;
 
@@ -84,7 +94,7 @@ form {
       grid-template-rows: 1fr;
       grid-column-gap: 10px;
       grid-row-gap: 0px;
-      width: 35%;
+      width: 37%;
 
       svg {
         fill: $color-blue-medium;
@@ -204,7 +214,7 @@ form {
 
     button {
       &:hover,
-      &:focus, {
+      &:focus {
         @extend .focus;
       }
     }
@@ -215,11 +225,27 @@ form {
 footer {
   padding: 32px;
   background: $color-blue-light;
+
   display: flex;
-  justify-content: flex-end;
+  flex-direction: row-reverse;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-content: flex-end;
+  align-items: flex-end;
+
+  &:nth-child(1) {
+    order: 0;
+    flex: 0 1 auto;
+    align-self: flex-start;
+  }
+
+  &:nth-child(2) {
+    order: 1;
+    flex: 0 1 auto;
+    align-self: flex-start;
+  }
 
   button {
-    appearance: none;
     background: $color-blue-medium;
     border: 2px solid $color-blue-medium;
     border-radius: 8px;
@@ -230,19 +256,34 @@ footer {
     font-weight: bold;
     padding: 8px 32px;
     cursor: pointer;
+
+    order: 0;
+    flex: 0 1 auto;
+    align-self: flex-start;
     
     &:hover,
     &:focus {
       @extend .focus;
     }
 
+    &:disabled {
+      background: $disabled;
+      border: $disabled-medium;
+      border-color: $disabled-medium;
+      cursor: not-allowed;
+      outline: none;
+    }
+
   }
 
   .container-message {
     min-height: 100px;
-    background: $color-blue-light;
     padding: 10px;
-  
+    order: 2;
+    flex: 0 1 auto;
+    align-self: flex-end;
+
+    
     .error {
       color: #860000;
   

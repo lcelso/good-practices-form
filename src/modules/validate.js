@@ -1,4 +1,4 @@
-import { fnEvents } from "./binds";
+import { fnAddEventListener, toogleClass } from "./binds";
 import { Const } from "./configs";
 
 const {
@@ -17,8 +17,8 @@ const {
 } = Const();
 
 const checkboxs = document.querySelectorAll(ELEMENT_CHECKBOX);
-const inputCounter = document.querySelectorAll('[id="counter"]')[0];
-const textArea = document.getElementsByTagName("textarea")[0];
+const elInputCounter = document.querySelectorAll('[id="counter"]')[0];
+const elFooter = document.getElementsByTagName("footer")[0];
 
 const createElement = (container, nameClass) => {
   return (paragraph) => {
@@ -82,7 +82,7 @@ const applyingTextError = (element, errorsElements) => {
       "div",
       CLASS_CONTAINER_MESSAGE
     )("p")(MSG_INIT);
-    element.closest("fieldset").appendChild(containerErrorElement);
+    element.appendChild(containerErrorElement);
   }
   updateListError(errorsElements);
 };
@@ -107,7 +107,6 @@ const apllyError = (elementErrors) => {
   );
   const { checkboxs, inputs } = elementErrors;
 
-
   let elements = [];
 
   if (checkboxs) {
@@ -121,13 +120,13 @@ const apllyError = (elementErrors) => {
     elements.push(item);
   });
 
-  if (elements.length === 0) containerError[0].classList.add("hide");
+  if (elements.length === 0) toogleClass(containerError[0], " hide");
 
   if (containerError.length === 0) {
     applyingErrorClass(elements);
-    applyingTextError(textArea, createObjectError(elements));
+    applyingTextError(elFooter, createObjectError(elements));
   } else {
-    applyingTextError(textArea, createObjectError(elements));
+    applyingTextError(elFooter, createObjectError(elements));
   }
 };
 
@@ -146,7 +145,6 @@ const elementFilter = (elements) => {
   );
 
   if (elementValid[0]?.checked === "true") return null;
-
   
   return elementsGroup;
 };
@@ -162,18 +160,15 @@ const createInvalidElementsObject = (checkboxs, inputs) => {
   return apllyError(objInvalid[0]);
 };
 
-const setClear = () => {
-  setTimeout(() => {
-    document.location.reload(true);    
-  }, 10000);
-};
+const setSuccess = () => {
+  const button = elFooter.querySelector("button");
 
-const setSucess = () => {
+  button.setAttribute("disabled","")
   const containerErrorElement = createElement(
     "div",
     CLASS_CONTAINER_MESSAGE
   )("p")(MSG_SUCCESS);
-  textArea.closest("fieldset").appendChild(containerErrorElement);
+  elFooter.appendChild(containerErrorElement);
 };
 
 const sendFormaData = () => {
@@ -183,7 +178,7 @@ const sendFormaData = () => {
     CLASS_CONTAINER_MESSAGE
   )[0];
 
-  if (containerMessage) containerMessage.classList.add("hide");
+  if (containerMessage) toogleClass(containerMessage, " hide");
 
   checkboxs.forEach((item) => {
     if (item.getAttribute("aria-checked") === "true") {
@@ -198,12 +193,11 @@ const sendFormaData = () => {
 
   data.push({
     checkboxs: checkboxData,
-    counter: inputCounter.value,
-    textarea: textArea.value,
+    counter: elInputCounter.value,
+    textarea: elFooter.value,
   });
 
-  setSucess();
-  setClear();
+  setSuccess();
   console.info("Dados para enviar para o servidor:");
   console.table(data[0]);
 };
@@ -237,13 +231,11 @@ const verify = (e, type) => {
   findAndVerifyElements(elements, type);
 };
 
-const Validate = () => {
-  const form = document.querySelector("form");
-  const inputBindEvents = fnEvents(["submit"], verify);
-  inputBindEvents(form)("submit");
+const ValidateForm = () => {
+  const buttonSumit = document.querySelector('[type="submit"]');
 
-  const checkboxBindEvents = fnEvents(["blur"], verify);
-  checkboxBindEvents(inputCounter)();
+  const inputBindEvents = fnAddEventListener(["click"], verify);
+  inputBindEvents(buttonSumit)("submit");
 
   checkboxs.forEach((checkbox) => {
     checkboxBindEvents(checkbox)("checkbox");
@@ -258,10 +250,10 @@ module.exports = {
   createObjectError,
   apllyError,
   sendFormaData,
-  setSucess,
+  setSucess: setSuccess,
   elementFilter,
   createInvalidElementsObject,
   findAndVerifyElements,
   verify,
-  Validate
+  ValidateForm
 };

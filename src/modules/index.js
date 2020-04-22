@@ -1,7 +1,7 @@
 import { Counter } from "./counter";
-import { Validate } from "./validate";
 import { ChangeCheckbox } from "./checkbox";
+import { ValidateForm } from "./validate";
 
 Counter();
 ChangeCheckbox();
-Validate();
+ValidateForm();

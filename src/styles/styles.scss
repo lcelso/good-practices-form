@@ -2,14 +2,22 @@
 @import './colors.scss';
 
 section {
+  background-image: url(../images/header.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 0 -70px;
+
   background-color: $color-gray;
-  border-radius: 8px;
+  border-radius: 20px;
   box-shadow: 10px 22px 34px 0 rgba(0, 0, 0, 0.5);
   margin: 20px auto;
   overflow: hidden;
 
   display: grid;
   grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: 1fr;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
   grid-row-gap: 0px;
   width: 60%;
 
@@ -17,6 +25,7 @@ section {
   and (min-device-width : 375px) 
   and (max-device-width : 812px) {
     width: 90%;
+    background-position: top center;
   }  
 }
 
@@ -38,10 +47,8 @@ fieldset,
   outline: dashed 1px $color-blue-medium;
 }
 
-header {
-  background-image: url(../images/header.png);
-  background-size: cover;
-  height: 200px;
+header {  
+  height: 195px;
   padding: 23px 36px;
   width: 100%;
 
